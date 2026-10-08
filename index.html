@@ -144,7 +144,10 @@
         <h3>Słuchawki Pro</h3>
         <p>Bezprzewodowe słuchawki premium.</p>
         <p class="cena">299 zł</p>
-        <button>Wkrótce: dodaj do koszyka</button>
+        
+<button onclick="dodajDoKoszyka('Słuchawki Pro', 299)">
+  Dodaj do koszyka 🛒
+</button>
       </div>
 
       <div class="produkt">
@@ -152,7 +155,11 @@
         <h3>Smartwatch X</h3>
         <p>Nowoczesny inteligentny zegarek.</p>
         <p class="cena">499 zł</p>
-        <button>Wkrótce: dodaj do koszyka</button>
+        
+<button onclick="dodajDoKoszyka('Smartwatch X', 499)">
+  Dodaj do koszyka 🛒
+</button>
+
       </div>
 
       <div class="produkt">
@@ -160,18 +167,102 @@
         <h3>Klawiatura RGB</h3>
         <p>Mechaniczna klawiatura gamingowa.</p>
         <p class="cena">349 zł</p>
-        <button>Wkrótce: dodaj do koszyka</button>
+        
+<button onclick="dodajDoKoszyka('Klawiatura RGB', 349)">
+  Dodaj do koszyka 🛒
+</button>
+
       </div>
     </div>
   </section>
 
-  <section class="produkty" id="koszyk">
-    <h2>🛒 Twój koszyk</h2>
-    <p>Interaktywny koszyk dodamy w kolejnym kroku.</p>
-  </section>
+
+<section class="produkty" id="koszyk">
+  <h2>🛒 Twój koszyk</h2>
+
+  <div id="lista-koszyka"></div>
+
+  <h3>
+    Razem: <span id="suma">0</span> zł
+  </h3>
+
+  <button onclick="wyczyscKoszyk()">
+    Wyczyść koszyk
+  </button>
+</section>
+
+
+<script>
+  let koszyk = JSON.parse(
+    localStorage.getItem("koszykNovaShop") || "[]"
+  );
+
+  function zapiszKoszyk() {
+    localStorage.setItem(
+      "koszykNovaShop",
+      JSON.stringify(koszyk)
+    );
+  }
+
+  function dodajDoKoszyka(nazwa, cena) {
+    koszyk.push({ nazwa, cena });
+    zapiszKoszyk();
+    pokazKoszyk();
+  }
+
+  function usunZKoszyka(index) {
+    koszyk.splice(index, 1);
+    zapiszKoszyk();
+    pokazKoszyk();
+  }
+
+  function wyczyscKoszyk() {
+    koszyk = [];
+    zapiszKoszyk();
+    pokazKoszyk();
+  }
+
+  function pokazKoszyk() {
+    const lista = document.getElementById(
+      "lista-koszyka"
+    );
+
+    lista.innerHTML = "";
+
+    let suma = 0;
+
+    koszyk.forEach((produkt, index) => {
+      suma += produkt.cena;
+
+      const element = document.createElement("div");
+      element.style.margin = "15px 0";
+
+      const opis = document.createElement("span");
+      opis.textContent =
+        produkt.nazwa + " — " + produkt.cena + " zł ";
+
+      const przycisk = document.createElement("button");
+      przycisk.textContent = "Usuń";
+      przycisk.onclick = () => usunZKoszyka(index);
+
+      element.append(opis, przycisk);
+      lista.appendChild(element);
+    });
+
+    if (koszyk.length === 0) {
+      lista.textContent = "Twój koszyk jest pusty.";
+    }
+
+    document.getElementById("suma").textContent =
+      suma.toFixed(2);
+  }
+
+  pokazKoszyk();
+</script>
 
   <footer>
     <p>© 2026 NovaShop — Projekt demonstracyjny</p>
   </footer>
+
 </body>
 </html>
