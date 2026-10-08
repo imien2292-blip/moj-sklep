@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>NovaShop | Sklep internetowy</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0e0e18;
+      color: white;
+    }
+
+    header {
+      background: #171327;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      color: #b794ff;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 90px 20px;
+      background: radial-gradient(
+        ellipse at top, #352052, #0e0e18 70%
+      );
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 55px);
+    }
+
+    .hero p {
+      color: #bcb8ce;
+    }
+
+    .produkty {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+      gap: 25px;
+    }
+
+    .produkt {
+      background: #1c1930;
+      border: 1px solid #47366e;
+      border-radius: 18px;
+      padding: 25px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .produkt:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 35px #6d28d955;
+    }
+
+    .obraz {
+      font-size: 75px;
+      padding: 30px 0;
+    }
+
+    .cena {
+      color: #b794ff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    button {
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      padding: 13px 22px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #a78bfa;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">⚡ NovaShop</div>
+    <nav>
+      <a href="#start">Start</a>
+      <a href="#produkty">Produkty</a>
+      <a href="#koszyk">Koszyk 🛒</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="start">
+    <h1>Technologia przyszłości</h1>
+    <p>Odkryj nowoczesny sprzęt elektroniczny.</p>
+    <a href="#produkty">
+      <button>Zobacz produkty</button>
+    </a>
+  </section>
+
+  <section class="produkty" id="produkty">
+    <h2>🔥 Polecane produkty</h2>
+
+    <div class="grid">
+      <div class="produkt">
+        <div class="obraz">🎧</div>
+        <h3>Słuchawki Pro</h3>
+        <p>Bezprzewodowe słuchawki premium.</p>
+        <p class="cena">299 zł</p>
+        <button>Wkrótce: dodaj do koszyka</button>
+      </div>
+
+      <div class="produkt">
+        <div class="obraz">⌚</div>
+        <h3>Smartwatch X</h3>
+        <p>Nowoczesny inteligentny zegarek.</p>
+        <p class="cena">499 zł</p>
+        <button>Wkrótce: dodaj do koszyka</button>
+      </div>
+
+      <div class="produkt">
+        <div class="obraz">⌨️</div>
+        <h3>Klawiatura RGB</h3>
+        <p>Mechaniczna klawiatura gamingowa.</p>
+        <p class="cena">349 zł</p>
+        <button>Wkrótce: dodaj do koszyka</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="produkty" id="koszyk">
+    <h2>🛒 Twój koszyk</h2>
+    <p>Interaktywny koszyk dodamy w kolejnym kroku.</p>
+  </section>
+
+  <footer>
+    <p>© 2026 NovaShop — Projekt demonstracyjny</p>
+  </footer>
+</body>
+</html>
