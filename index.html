@@ -8,6 +8,48 @@
   <title>NovaShop | Sklep internetowy</title>
 
   <style>
+    
+.filtry {
+  display: flex;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.filtry input,
+.filtry select {
+  background: #1c1930;
+  border: 1px solid #6d4aff;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.filtry input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filtry select {
+  min-width: 160px;
+}
+
+.produkt {
+  animation: pojawienie 0.4s ease;
+}
+
+@keyframes pojawienie {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
     * {
       box-sizing: border-box;
     }
@@ -138,8 +180,24 @@
   <section class="produkty" id="produkty">
     <h2>🔥 Polecane produkty</h2>
 
+<div class="filtry">
+  <input
+    type="search"
+    id="wyszukiwarka"
+    placeholder="🔎 Szukaj produktów..."
+    oninput="filtrujProdukty()"
+  >
+
+  <select id="kategoria" onchange="filtrujProdukty()">
+    <option value="wszystkie">Wszystkie produkty</option>
+    <option value="audio">Audio</option>
+    <option value="smart">Smartwatche</option>
+    <option value="gaming">Gaming</option>
+  </select>
+</div>
+
     <div class="grid">
-      <div class="produkt">
+      <div class="produkt" data-kategoria="audio">
         <div class="obraz">🎧</div>
         <h3>Słuchawki Pro</h3>
         <p>Bezprzewodowe słuchawki premium.</p>
@@ -150,7 +208,7 @@
 </button>
       </div>
 
-      <div class="produkt">
+      <div class="produkt" data-kategoria="smart">
         <div class="obraz">⌚</div>
         <h3>Smartwatch X</h3>
         <p>Nowoczesny inteligentny zegarek.</p>
@@ -162,7 +220,7 @@
 
       </div>
 
-      <div class="produkt">
+     <div class="produkt" data-kategoria="gaming">
         <div class="obraz">⌨️</div>
         <h3>Klawiatura RGB</h3>
         <p>Mechaniczna klawiatura gamingowa.</p>
@@ -173,6 +231,37 @@
 </button>
 
       </div>
+      
+<div class="produkt" data-kategoria="gaming">
+  <div class="obraz">🖱️</div>
+  <h3>Mysz Gaming Pro</h3>
+  <p>Precyzyjna mysz dla graczy.</p>
+  <p class="cena">199 zł</p>
+  <button onclick="dodajDoKoszyka('Mysz Gaming Pro', 199)">
+    Dodaj do koszyka 🛒
+  </button>
+</div>
+
+<div class="produkt" data-kategoria="audio">
+  <div class="obraz">🔊</div>
+  <h3>Głośnik Bluetooth</h3>
+  <p>Bezprzewodowy głośnik premium.</p>
+  <p class="cena">249 zł</p>
+  <button onclick="dodajDoKoszyka('Głośnik Bluetooth', 249)">
+    Dodaj do koszyka 🛒
+  </button>
+</div>
+
+<div class="produkt" data-kategoria="gaming">
+  <div class="obraz">🎮</div>
+  <h3>Kontroler Wireless</h3>
+  <p>Bezprzewodowy kontroler do gier.</p>
+  <p class="cena">279 zł</p>
+  <button onclick="dodajDoKoszyka('Kontroler Wireless', 279)">
+    Dodaj do koszyka 🛒
+  </button>
+</div>
+
     </div>
   </section>
 
@@ -258,6 +347,35 @@
   }
 
   pokazKoszyk();
+  
+function filtrujProdukty() {
+  const szukaj = document
+    .getElementById("wyszukiwarka")
+    .value.toLowerCase().trim();
+
+  const kategoria = document
+    .getElementById("kategoria")
+    .value;
+
+  const produkty = document.querySelectorAll(
+    ".produkt"
+  );
+
+  produkty.forEach(produkt => {
+    const nazwa = produkt.querySelector("h3")
+      .textContent.toLowerCase();
+
+    const zgodnaNazwa = nazwa.includes(szukaj);
+
+    const zgodnaKategoria =
+      kategoria === "wszystkie" ||
+      produkt.dataset.kategoria === kategoria;
+
+    produkt.style.display =
+      zgodnaNazwa && zgodnaKategoria ? "" : "none";
+  });
+}
+
 </script>
 
   <footer>
